@@ -69,6 +69,8 @@ body {
   opacity: 0;
   transform: translateY(40px);
   transition: all 0.9s ease;
+
+  flex-wrap: nowrap;
 }
 .section.show {
   opacity: 1;
@@ -82,8 +84,11 @@ body {
   box-shadow: 0 20px 40px rgba(0,0,0,0.35);
 }
 .text {
-  max-width: 400px;
+  max-width: 420px;
+  font-size: 1.3rem;   /* ← makes text bigger */
+  line-height: 1.8;    /* ← makes it more readable */
 }
+
 .reverse {
   flex-direction: row-reverse;
 }
