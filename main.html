@@ -248,7 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* TIMER */
   const birthday = new Date("2026-01-28T00:00:00");
-  let timeLeft = (10);
+  let timeLeft = Math.floor((birthday - new Date())/1000);
 
   if(timeLeft>0){
     heroTitle.innerText="Waiting for your special day 💖";
@@ -296,3 +296,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
