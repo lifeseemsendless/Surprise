@@ -243,20 +243,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* TIMER */
-  function getNextBirthday() {
-    const now = new Date();
-    let year = now.getFullYear();
+  
+function getNextBirthday() {
+  const now = new Date();
+  const year = now.getFullYear();
 
-    // Set this year's birthday
-    let birthday = new Date(year, 0, 28, 0, 0, 0);
+  // Birthday date: November 8 (month 10)
+  const birthday = new Date(year, 0, 28, 0, 0, 0);
 
-    // If this year's birthday has passed, use next year
-    if (now >= birthday) {
-      birthday = new Date(year + 1, 0, 28, 0, 0, 0);
-    }
+  // Compare calendar dates, ignoring the time
+  const today = new Date(year, now.getMonth(), now.getDate());
 
-    return birthday;
+  if (today > birthday) {
+    return new Date(year + 1, 0, 28, 0, 0, 0);
   }
+
+  return birthday;
+}
+
 
   const birthday = getNextBirthday();
 let timeLeft = Math.floor((birthday - new Date()) / 1000);
@@ -308,6 +312,5 @@ if (timeLeft <= 0) {
 
 </body>
 </html>
-
 
 
