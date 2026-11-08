@@ -243,40 +243,52 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* TIMER */
-  const birthday = new Date("2027-01-28T00:00:00");
-  let timeLeft = Math.floor((birthday - new Date())/1000);
+  function getNextBirthday() {
+    const now = new Date();
+    let year = now.getFullYear();
 
-  if(timeLeft>0){
-    heroTitle.innerText="Waiting for your special day 💖";
-  } else {
-    heroTitle.innerText="Just one more moment… 💖";
-    timeLeft=30;
+    // Set this year's birthday
+    let birthday = new Date(year, 0, 28, 0, 0, 0);
+
+    // If this year's birthday has passed, use next year
+    if (now >= birthday) {
+      birthday = new Date(year + 1, 0, 28, 0, 0, 0);
+    }
+
+    return birthday;
   }
 
-  const timer=setInterval(()=>{
-    const d=Math.floor(timeLeft/86400);
-    const h=Math.floor((timeLeft%86400)/3600);
-    const m=Math.floor((timeLeft%3600)/60);
-    const s=timeLeft%60;
+  const birthday = getNextBirthday();
+  let timeLeft = Math.floor((birthday - new Date()) / 1000);
 
-    countdownText.innerText=`${d}d ${h}h ${m}m ${s}s`;
+  heroTitle.innerText = "Waiting for your special day 💖";
+
+  const timer = setInterval(() => {
+    const d = Math.floor(timeLeft / 86400);
+    const h = Math.floor((timeLeft % 86400) / 3600);
+    const m = Math.floor((timeLeft % 3600) / 60);
+    const s = timeLeft % 60;
+
+    countdownText.innerText = `${d}d ${h}h ${m}m ${s}s`;
     timeLeft--;
 
-    if(timeLeft<0){
+    if (timeLeft < 0) {
       clearInterval(timer);
-      heroTitle.innerText="Happy Birthday, Alanka 🎉💖";
+      heroTitle.innerText = "Happy Birthday, Alanka 🎉💖";
       heroTitle.classList.add("glow");
-      countdownText.innerText="Today is all about you 💕";
+      countdownText.innerText = "Today is all about you 💕";
 
-      letterSection.style.display="block";
-      setTimeout(()=>{
+      letterSection.style.display = "block";
+
+      setTimeout(() => {
         letterSection.classList.add("showLetter");
-        letterSection.scrollIntoView({behavior:"smooth"});
-      },100);
+        letterSection.scrollIntoView({ behavior: "smooth" });
+      }, 100);
 
       startConfetti();
     }
-  },1000);
+  }, 1000);
+
 
   /* SCROLL ANIMATION */
   const observer=new IntersectionObserver(entries=>{
