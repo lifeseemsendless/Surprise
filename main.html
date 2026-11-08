@@ -259,10 +259,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const birthday = getNextBirthday();
-  let timeLeft = Math.floor((birthday - new Date()) / 1000);
+let timeLeft = Math.floor((birthday - new Date()) / 1000);
 
+if (timeLeft <= 0) {
+  timeLeft = 30;
+  heroTitle.innerText = "Just one more moment… 💖";
+} else {
   heroTitle.innerText = "Waiting for your special day 💖";
-
+}
   const timer = setInterval(() => {
     const d = Math.floor(timeLeft / 86400);
     const h = Math.floor((timeLeft % 86400) / 3600);
